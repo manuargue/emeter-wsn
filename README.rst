@@ -10,10 +10,10 @@ The data is colected by a central node (who starts the wireless network) and tra
 
 Brief:
 
-- ZigBee WSN using TI CC2530 SoC (C language)
-- Main controller for nodes: TI MSP430 low power uC (C language)
-- Logging app built on Java (MySQL data base/BIRT report designer)
-- Utils scripts for testing FFT algorithms and ADC sampling (Matlab scripting)
+- ZigBee WSN using TI CC2530 SoC (**C language**)
+- Main controller for nodes: TI MSP430 low power uC (**C language**)
+- Logging app built on **Java** (MySQL data base/BIRT report designer)
+- Utils scripts for testing FFT algorithms and ADC sampling (**Matlab scripting**)
 
 :Author: Manuel Argüelles
 :Version: 1.0
