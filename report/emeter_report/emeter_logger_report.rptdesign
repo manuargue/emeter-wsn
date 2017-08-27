@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <text-property name="title">eMeter Logger</text-property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">8</property>
+        </structure>
+    </list-property>
+    <property name="units">in</property>
+    <text-property name="displayName">eMeter Logger</text-property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="eMeter Logger" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://localhost/emeter</property>
+            <property name="odaUser">root</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">dG9vcg==</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="nodes" id="8">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Estado</property>
+                    <expression name="expression">if (row["state"] ==1) {"Activo"} else {"Inactivo"}</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">MAC</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">MAC</text-property>
+                    <text-property name="heading">MAC</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Nombre</text-property>
+                    <text-property name="heading">Nombre</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">state</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="heading">state</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estado</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Estado</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">MAC</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">state</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Estado</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">eMeter Logger</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">MAC</property>
+                    <property name="nativeName">MAC</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">state</property>
+                    <property name="nativeName">state</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+	hex(mac)	AS MAC,
+	name		AS Nombre,
+	state
+FROM emeter.nodes;]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>MAC</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>MAC</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>MAC</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>20</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Nombre</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Nombre</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>state</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Estado</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Estado</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="41">
+            <property name="height">3.6041666666666665in</property>
+            <property name="width">7.947916666666667in</property>
+            <column id="42">
+                <property name="width">0.53125in</property>
+            </column>
+            <column id="43">
+                <property name="width">6.854166666666667in</property>
+            </column>
+            <column id="44">
+                <property name="width">0.5625in</property>
+            </column>
+            <row id="45">
+                <property name="height">0.5104166666666666in</property>
+                <cell id="46">
+                    <property name="backgroundColor">#FFFFF7</property>
+                </cell>
+                <cell id="47">
+                    <property name="backgroundColor">#FFFFF7</property>
+                    <label id="57">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">24px</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="color">#1E90FF</property>
+                        <property name="marginTop">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="display">block</property>
+                        <text-property name="text">Registro de mensajes</text-property>
+                    </label>
+                </cell>
+                <cell id="48">
+                    <property name="backgroundColor">#FFFFF7</property>
+                </cell>
+            </row>
+            <row id="49">
+                <property name="height">0.4479166666666667in</property>
+                <cell id="50">
+                    <property name="backgroundColor">#FFFFF7</property>
+                </cell>
+                <cell id="51">
+                    <property name="backgroundColor">#FFFFF7</property>
+                    <text id="91">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<form name="input" onSubmit="return reloadPage();">
+
+<script type="text/javascript">
+
+function reloadPage() {
+	var temp = new String(location.href);
+	var targetURL = new String();
+
+	if (temp.indexOf("__overwrite=") != -1 ) {
+		targetURL = temp.substring(0, temp.indexOf("&amp;__overwrite") -1);
+	} else {
+		targetURL = temp;
+	}
+
+	targetURL += "&amp;__overwrite=true";
+	location.replace(targetURL);
+	
+	return false;
+}
+
+//timer = setTimeout('reloadPage()', 60000);
+</script>
+
+</form>]]></text-property>
+                    </text>
+                </cell>
+                <cell id="52">
+                    <property name="backgroundColor">#FFFFF7</property>
+                </cell>
+            </row>
+            <row id="53">
+                <property name="height">2.6458333333333335in</property>
+                <cell id="54">
+                    <property name="backgroundColor">#FFFFF7</property>
+                </cell>
+                <cell id="55">
+                    <property name="backgroundColor">#FFFFF7</property>
+                    <table id="69">
+                        <property name="dataSet">nodes</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">MAC</property>
+                                <text-property name="displayName">MAC</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MAC"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">Nombre</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Estado</property>
+                                <text-property name="displayName">Estado</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Estado"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <column id="88">
+                            <property name="width">33%</property>
+                        </column>
+                        <column id="89">
+                            <property name="width">33%</property>
+                        </column>
+                        <column id="90">
+                            <property name="width">33%</property>
+                        </column>
+                        <header>
+                            <row id="70">
+                                <cell id="71">
+                                    <label id="72">
+                                        <property name="fontWeight">normal</property>
+                                        <property name="color">#0058AE</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="paddingBottom">4pt</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">MAC</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="73">
+                                    <label id="74">
+                                        <property name="fontWeight">normal</property>
+                                        <property name="color">#0058AE</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="paddingBottom">4pt</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Nombre</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="75">
+                                    <label id="76">
+                                        <property name="fontWeight">normal</property>
+                                        <property name="color">#0058AE</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="paddingBottom">4pt</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Estado</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="77">
+                                <list-property name="highlightRules">
+                                    <structure>
+                                        <property name="operator">eq</property>
+                                        <property name="backgroundColor">#E6E6FA</property>
+                                        <expression name="testExpr" type="javascript">row[0] % 2</expression>
+                                        <simple-property-list name="value1">
+                                            <value type="javascript">0</value>
+                                        </simple-property-list>
+                                    </structure>
+                                </list-property>
+                                <cell id="78">
+                                    <data id="79">
+                                        <property name="marginTop">4pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <structure name="stringFormat">
+                                            <property name="category">></property>
+                                            <property name="pattern">></property>
+                                        </structure>
+                                        <property name="resultSetColumn">MAC</property>
+                                        <list-property name="action">
+                                            <structure>
+                                                <property name="linkType">drill-through</property>
+                                                <property name="reportName">node_report.rptdesign</property>
+                                                <property name="targetWindow">_self</property>
+                                                <property name="targetFileType">report-design</property>
+                                                <list-property name="paramBindings">
+                                                    <structure>
+                                                        <property name="paramName">selectedTable</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">row["MAC"].slice(0,8).toLowerCase()</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="paramName">nodeMac</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">row["MAC"]</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="paramName">nodeState</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">row["Estado"]</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="paramName">nodeName</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">row["name"]</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                            </structure>
+                                        </list-property>
+                                    </data>
+                                </cell>
+                                <cell id="80">
+                                    <data id="81">
+                                        <property name="marginTop">4pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="resultSetColumn">name</property>
+                                    </data>
+                                </cell>
+                                <cell id="82">
+                                    <data id="83">
+                                        <property name="marginTop">4pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="resultSetColumn">Estado</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="84">
+                                <cell id="85"/>
+                                <cell id="86"/>
+                                <cell id="87"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+                <cell id="56">
+                    <property name="backgroundColor">#FFFFF7</property>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

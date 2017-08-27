@@ -1,0 +1,71 @@
+package ar.emeterlogger;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.sql.Timestamp;
+import java.util.Date;
+
+public class ReportMessage
+{
+	private Date time;
+    private int sequence;
+    // parámetros eléctricos
+    private float[] params;
+    // flags de alarmas
+    private int alarmFlags;
+    
+    public ReportMessage(byte[] uartRx)
+    {
+    	// uartRx contiene los bytes recibidos por el puerto serie,
+    	// en little-endian (LSB primero).
+    	// 2b=uint16	SEQ
+    	// 2b=uint16	FLAGALARMS
+    	// 4b=float		VRMS, IRMS, ACTPOW, APPPOW, POWFACTOR, ENERGY,
+    	// 				VTHD3, VTHD5, ITHD3, ITHD5
+    	
+    	this.time = new Date();
+    	this.sequence = this.byteToUInt16(uartRx[1], uartRx[0]); 
+    	this.alarmFlags = this.byteToUInt16(uartRx[3], uartRx[2]);
+    	this.params = new float[10];
+    	for (int i = 0; i < params.length; i++)
+    	{
+    		params[i] = ByteBuffer.wrap(uartRx, 4+i*4, 4).
+    				order(ByteOrder.LITTLE_ENDIAN).getFloat(4+i*4);
+    	}
+    }
+    
+    /**
+     * Convierte dos bytes a un int. Los dos bytes juntos son considerados
+     * como un unsigned int de 16 bits, por lo que 0xFFFF = 65535.
+     * @param hi	MSB
+     * @param lo	LSB
+     * @return
+     */
+    private int byteToUInt16(byte hi, byte lo)
+    {
+    	return ( ((hi & 0x000000FF) << 8) + (lo & 0x00FF) );
+    }
+
+	public Timestamp getTimestamp()
+	{
+		return new Timestamp(this.time.getTime());
+	}
+
+	public Date getTime()
+	{
+		return this.time;
+	}
+	
+	public int getSequence()
+	{	
+		return this.sequence;
+	}
+
+	public int getAlarmFlags() {
+		return this.alarmFlags;
+	}
+
+	public float[] getParameters() {
+		return this.params;
+	}
+}

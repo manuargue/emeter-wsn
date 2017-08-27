@@ -1,0 +1,32 @@
+package ar.emeterlogger;
+
+public class TestDataBase
+{
+    public static void main(String[] args)
+    {
+    	Debugger.enabled(true);
+    	
+        // nodos
+        SensorNode node1 = new SensorNode("A011223344556677", "cocina", NodeState.ACTIVE);
+        byte[] macNode2 = {(byte)0xAB, (byte)0xFF, (byte)0x73, (byte)0x41,
+        					(byte)0xCA, (byte) 0xFE, (byte)0xCA, (byte) 0xFE};
+        SensorNode node2 = new SensorNode(macNode2, "living");
+        Debugger.log(node1);
+        Debugger.log(node2);
+        Debugger.log(node1.getTableName());
+
+        /*
+        SQLHandler dao = new SQLHandler();
+        dao.connect();
+        dao.createNodesTable();
+        
+        dao.addNode(node1);
+        dao.addNode(node2);
+        
+        node1.setState(NodeState.INACTIVE);
+        dao.updateNodeState(node1);
+        
+        dao.close();
+        */
+    }
+}
